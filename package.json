@@ -3,7 +3,11 @@
   "version": "0.0.1",
   "private": true,
   "dependencies": {
-    "apify": "^1.2.1"
+    "apify": "^1.2.1",
+    "cheerio": "^1.0.0-rc.11",
+    "moment": "^2.29.3",
+    "node-fetch": "^3.2.6",
+    "puppeteer": "^9.1.1"
   },
   "devDependencies": {
     "cross-env": "^7.0.2"
