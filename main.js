@@ -4,6 +4,8 @@
 
 const Apify = require('apify');
 const cheerio = require('cheerio');
+// const fetch = require('node-fetch');
+const moment = require('moment');
 
 Apify.main(async () => {
     console.log('Launching Puppeteer...');
@@ -33,6 +35,32 @@ Apify.main(async () => {
     const result = $('div[class = "pmmxKx"]');
 
     console.log(result.text())
+
+
+    const payload = {
+        price : result.text(),
+        time : moment().format("LLLL")
+    }
+    
+    const saveData = await fetch(
+        "https://sheet.best/api/sheets/26dbf059-94fa-4567-916a-d7db3011b4f5",
+        {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                "X-Api-Key": "Xom_BvPqquWURXJ2H4mVIH8eW$2lxplFJx7TP!!CaTLeNbOpgfViZdm1bfxSSmeQ"
+            },
+            body: JSON.stringify(payload),
+        }
+    );
+
+    if (saveData.status == 200) {
+        await page.close();
+        await browser.close();
+    } else {
+        console.log(saveData);
+    }
 
     // Wait 30s to see Chromium works :)
     await new Promise(resolve => setTimeout(resolve, 20000));
