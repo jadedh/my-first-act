@@ -10,7 +10,10 @@
 #  apify/actor-node-chrome-xvfb (Node.js + Chrome + Xvfb on Debian)
 # For more information, see https://docs.apify.com/actor/build#base-images
 # Note that you can use any other image from Docker Hub.
-FROM apify/actor-node-chrome
+FROM node:14-alpine
+
+# Resolves Error: EACCES: permission denied
+USER root
 
 # Second, copy just package.json since it should be the only file
 # that affects "npm install" in the next step, to speed up the build
@@ -26,9 +29,7 @@ RUN npm --quiet set progress=false \
  && echo "Node.js version:" \
  && node --version \
  && echo "NPM version:" \
- && npm --version \
- && npm install puppeteer \
- && npm install cheerio
+ && npm --version
 
 # Next, copy the remaining files and directories with the source code.
 # Since we do this after NPM install, quick build will be really fast
@@ -43,4 +44,4 @@ COPY --chown=myuser . ./
 # in the "scripts.start" section of the package.json file.
 # In short, the instruction looks something like this:
 #
-# CMD npm start
+# CMD node main.js
