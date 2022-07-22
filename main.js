@@ -7,6 +7,10 @@ const cheerio = require('cheerio');
 // const fetch = require('node-fetch');
 const moment = require('moment');
 
+
+
+console.log('Launch script...');      
+
 Apify.main(async () => {
     console.log('Launching Puppeteer...');
     const browser = await Apify.launchPuppeteer();

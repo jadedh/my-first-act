@@ -10,7 +10,7 @@
 #  apify/actor-node-chrome-xvfb (Node.js + Chrome + Xvfb on Debian)
 # For more information, see https://docs.apify.com/actor/build#base-images
 # Note that you can use any other image from Docker Hub.
-FROM apify/actor-node-chrome:v0.21.10
+FROM node:14-alpine
 
 # Resolves Error: EACCES: permission denied
 USER root

@@ -21,6 +21,7 @@ In order to test the build of the Docker image, you can run:
 
 ```
 docker build ./
+docker build -t myfirstact:x.x.x . 
 ```
 
 On success, the command will print something like:
@@ -39,9 +40,10 @@ After that you can run the built Docker image locally using:
 
 ```bash
 docker run XYZ
+docker run myfirstact:x.x.x
 ```
 
-Where `XYZ` is ID of the Docker image built in the previous step.
+Where `XYZ` is ID of the Docker image, x.x.x is version of the docker image built in the previous step.
 
 If there is any problem with the built image, you might try troubleshooting it
 by starting the container in interactive mode using:
@@ -90,13 +92,7 @@ The file is used by NPM to maintain metadata about the Node.js source code,
 such as the list of dependencies.
 For details, see [NPM documentation](https://docs.npmjs.com/files/package.json).
 
-## `README.md`
 
-Contains a [Markdown](https://www.markdownguide.org/cheat-sheet)
-documentation what your actor does and how to use it,
-which is then displayed in the app or [library](https://apify.com/apify/quick-start).
-It's always a good idea to write a good README.md, in a few months not even you
-will remember all the details about the actor.
 
 ## `apify_storage`
 
