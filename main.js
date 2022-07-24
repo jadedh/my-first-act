@@ -13,7 +13,12 @@ console.log('Launch script...');
 
 Apify.main(async () => {
     console.log('Launching Puppeteer...');
-    const browser = await Apify.launchPuppeteer();
+    const browser = await Apify.launchPuppeteer({
+      launchOptions: {
+          headless: false
+          //,args: ['--no-sandbox']
+      }
+    });
 
     const page = await browser.newPage();
 
