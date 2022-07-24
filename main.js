@@ -11,9 +11,16 @@ const moment = require('moment');
 
 console.log('Launch script...');      
 
+const isV1 = typeof Apify.launchPuppeteer === 'function';
+
 Apify.main(async () => {
     console.log('Launching Puppeteer...');
-    const browser = await Apify.launchPuppeteer();
+
+    // We need --no-sandbox, for app running in Docker.
+    const launchOptions = { headless: true, args: ['--no-sandbox'] };
+    const launchContext = isV1 ? { launchOptions } : launchOptions;
+
+    const browser = await Apify.launchPuppeteer(launchContext);
 
     const page = await browser.newPage();
 
@@ -38,7 +45,7 @@ Apify.main(async () => {
     console.log(result.text())
 
     // Wait 30s to see Chromium works :)
-    await new Promise(resolve => setTimeout(resolve, 20000));
+    await new Promise(resolve => setTimeout(resolve, 200));
 
     await browser.close();
 });
